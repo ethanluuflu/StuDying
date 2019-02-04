@@ -81,6 +81,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                             //user is successfully registered
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = firebaseAuth.getCurrentUser();
+                            //startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                            Toast.makeText(RegisterActivity.this, "Authentication succeeded.",
+                                    Toast.LENGTH_SHORT).show();
+                            finish();
                         }
                         else {
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
