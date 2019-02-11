@@ -22,6 +22,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private EditText etName;
     private EditText etEmail;
     private EditText etPassword;
+    private EditText etConfirmPassword;
 
     private ProgressDialog progressDialog;
 
@@ -42,6 +43,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         etName = findViewById(R.id.nameET);
         etEmail = findViewById(R.id.emailET);
         etPassword = findViewById(R.id.passwordET);
+        etConfirmPassword = findViewById(R.id.confirmPasswordET);
 
         registerButton.setOnClickListener(this);
     }
@@ -59,20 +61,30 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         if(TextUtils.isEmpty(email)){
             //email is empty
-            Toast.makeText(this, "Please enter your email address", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please enter your email address.", Toast.LENGTH_SHORT).show();
             //stop function execution
             return;
         }
 
         if(TextUtils.isEmpty(password)){
             //password is empty
-            Toast.makeText(this, "Please enter your password", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please enter your password.", Toast.LENGTH_SHORT).show();
             //stop function execution
             return;
         }
 
+        if(!etPassword.getText().toString().trim().equals(etConfirmPassword.getText().toString().trim())){
+            //passwords do not match
+            Toast.makeText(this, "Passwords do not match.", Toast.LENGTH_SHORT).show();
+            //stop function execution
+            return;
+        }
+
+        //show progress dialog
         progressDialog.setMessage("Registering User...");
         progressDialog.show();
+
+        //create a user using email/password and store into Firebase
         firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -87,6 +99,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                             finish();
                         }
                         else {
+                            //user failed to register
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
                             Toast.makeText(RegisterActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
