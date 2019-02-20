@@ -22,7 +22,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
-    private TextView registerLink;
+    private TextView registerLink, forgotLink;
     private FirebaseAuth firebaseAuth;
     private EditText edEmail, edPassword;
     private Button loginBtn;
@@ -40,6 +40,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         registerLink.setOnClickListener(this);
 
+        forgotLink = findViewById(R.id.forgotLink);
+        forgotLink.setOnClickListener(this);
         progressDialog = new ProgressDialog(this);
 
         edEmail = findViewById(R.id.userNameEditText);
@@ -100,6 +102,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
         if(view.getId() == R.id.loginButton) {
             loginUser();
+        }
+        if(view == forgotLink) {
+            Intent i = new Intent(LoginActivity.this, ForgotPWActivity.class);
+            startActivity(i);
         }
     }
 }
