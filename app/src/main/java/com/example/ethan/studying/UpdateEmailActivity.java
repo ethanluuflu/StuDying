@@ -14,6 +14,8 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class UpdateEmailActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -21,6 +23,7 @@ public class UpdateEmailActivity extends AppCompatActivity implements View.OnCli
     private Button update;
     private FirebaseAuth mAuth;
     private FirebaseUser user;
+    private DatabaseReference userDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +31,7 @@ public class UpdateEmailActivity extends AppCompatActivity implements View.OnCli
         setContentView(R.layout.activity_update_email);
         mAuth = FirebaseAuth.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();
+        userDB = FirebaseDatabase.getInstance().getReference("Users");
         oldEmail = findViewById(R.id.etOldEmail);
         newEmail = findViewById(R.id.etNewEmail);
         password = findViewById(R.id.etPassword);
@@ -40,7 +44,6 @@ public class UpdateEmailActivity extends AppCompatActivity implements View.OnCli
     public void onClick(View view) {
         if(view == update) {
             AuthCredential credential = EmailAuthProvider.getCredential(oldEmail.getText().toString().trim(), password.getText().toString().trim());
-
             user.reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
@@ -50,6 +53,7 @@ public class UpdateEmailActivity extends AppCompatActivity implements View.OnCli
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
+                                    updateEmail(newEmail.getText().toString().trim());
                                     Toast.makeText(getApplicationContext(), "Success. Your email has been changed.", Toast.LENGTH_SHORT).show();
                                 } else {
                                     Toast.makeText(getApplicationContext(), "Change email attempt failed.", Toast.LENGTH_SHORT).show();
@@ -62,5 +66,10 @@ public class UpdateEmailActivity extends AppCompatActivity implements View.OnCli
                 }
             });
         }
+    }
+
+    private void updateEmail(String email) {
+        userDB.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .child("email").setValue(email);
     }
 }

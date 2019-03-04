@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         }
         if(view == groupBtn) {
-            Intent i = new Intent(MainActivity.this, GroupActivity.class);
+            Intent i = new Intent(MainActivity.this, CreateGroupActivity.class);
             startActivity(i);
         }
         if(view == accountBtn) {
