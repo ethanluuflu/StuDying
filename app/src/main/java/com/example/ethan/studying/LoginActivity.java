@@ -1,7 +1,9 @@
 package com.example.ethan.studying;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -46,6 +48,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         edPassword = findViewById(R.id.passwordEditText);
         loginBtn = findViewById(R.id.loginButton);
         loginBtn.setOnClickListener(this);
+
     }
 
     private void loginUser() {
@@ -80,6 +83,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             Toast.makeText(LoginActivity.this, "Login succeeded.",
                                     Toast.LENGTH_SHORT).show();
                             Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                            i.putExtra("email", edEmail.getText().toString().trim());
                             startActivity(i);
                             finish();
                         }
@@ -101,5 +105,23 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if(view.getId() == R.id.loginButton) {
             loginUser();
         }
+    }
+
+    @Override
+    public void onBackPressed(){
+        new AlertDialog.Builder(this)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle("Close StuDying+")
+                .setMessage("Are you sure you want to close this program?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+
+                })
+                .setNegativeButton("No", null)
+                .show();
     }
 }
