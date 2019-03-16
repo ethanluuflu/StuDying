@@ -15,7 +15,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
     private Button registerButton;
@@ -49,7 +51,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void registerUser(){
-        String email = etEmail.getText().toString().trim();
+        final String name = etName.getText().toString().trim();
+        final String email = etEmail.getText().toString().trim();
         String password = etPassword.getText().toString().trim();
 
 //        if(!email.contains(".edu")){
@@ -92,17 +95,37 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         if (task.isSuccessful()) {
                             //user is successfully registered
                             Log.d(TAG, "createUserWithEmail:success");
-                            FirebaseUser user = firebaseAuth.getCurrentUser();
-                            //startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
-                            Toast.makeText(RegisterActivity.this, "Authentication succeeded.",
-                                    Toast.LENGTH_SHORT).show();
+                            FirebaseUser currUser = firebaseAuth.getCurrentUser();
+                            User user = new User(name, email, currUser.getUid());
+                            FirebaseDatabase.getInstance().getReference("Users").child(currUser.getUid()).setValue(user)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                Toast.makeText(RegisterActivity.this, "Registration succeeded.",
+                                                        Toast.LENGTH_LONG).show();
+                                            } else {
+                                                Toast.makeText(RegisterActivity.this, "Account failed to be created.",
+                                                        Toast.LENGTH_LONG).show();
+                                            }
+                                        }
+                                    });
                             finish();
+
                         }
                         else {
                             //user failed to register
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(RegisterActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
+                            //check if email already exist
+                            //TODO: Bunly's code here broke with the merge
+                            /**
+                            if (task.getException() instanceof FirebaseAuthUserCollisionException) {
+                                Toast.makeText(RegisterActivity.this, "This email already exist.", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(RegisterActivity.this, "Registration failed.",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                             */
                         }
                     }
                 });

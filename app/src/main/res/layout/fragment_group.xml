@@ -1,14 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#303030">
+    android:background="#303030"
+    android:gravity="center"
+    android:orientation="vertical">
 
     <TextView
+        android:id="@+id/textView8"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:text="Create a New Study Group"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/etGroupName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Group Fragment"
-        android:textSize="30sp"
-        android:layout_centerInParent="true"/>
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Enter Group Name"
+        android:textAlignment="textStart" />
 
-</RelativeLayout>
+    <Button
+        android:id="@+id/createGroupBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create Group" />
+
+</LinearLayout>

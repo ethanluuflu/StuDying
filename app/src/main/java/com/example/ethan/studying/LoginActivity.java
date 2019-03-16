@@ -24,7 +24,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
-    private TextView registerLink;
+    private TextView registerLink, forgotLink;
     private FirebaseAuth firebaseAuth;
     private EditText edEmail, edPassword;
     private Button loginBtn;
@@ -42,13 +42,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         registerLink.setOnClickListener(this);
 
+        forgotLink = findViewById(R.id.forgotLink);
+        forgotLink.setOnClickListener(this);
         progressDialog = new ProgressDialog(this);
 
         edEmail = findViewById(R.id.userNameEditText);
         edPassword = findViewById(R.id.passwordEditText);
         loginBtn = findViewById(R.id.loginButton);
         loginBtn.setOnClickListener(this);
-
     }
 
     private void loginUser() {
@@ -83,7 +84,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             Toast.makeText(LoginActivity.this, "Login succeeded.",
                                     Toast.LENGTH_SHORT).show();
                             Intent i = new Intent(LoginActivity.this, MainActivity.class);
-                            i.putExtra("email", edEmail.getText().toString().trim());
                             startActivity(i);
                             finish();
                         }
@@ -105,7 +105,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if(view.getId() == R.id.loginButton) {
             loginUser();
         }
+        if(view == forgotLink) {
+            Intent i = new Intent(LoginActivity.this, ForgotPWActivity.class);
+            startActivity(i);
+        }
     }
+
 
     @Override
     public void onBackPressed(){

@@ -7,11 +7,57 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
-public class GroupFragment extends Fragment {
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+public class GroupFragment extends Fragment implements View.OnClickListener{
+    private EditText etGroup;
+    private Button createGroupBtn;
+
+    private DatabaseReference groupsDB;
+    private FirebaseAuth mAuth;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_group, container, false);
+        final View view = (View) inflater.inflate(R.layout.fragment_group, container, false);
+        etGroup = view.findViewById(R.id.etGroupName);
+        createGroupBtn = view.findViewById(R.id.createGroupBtn);
+        createGroupBtn.setOnClickListener(this);
+
+        groupsDB = FirebaseDatabase.getInstance().getReference("Groups");
+        mAuth = FirebaseAuth.getInstance();
+
+        return view;
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view == createGroupBtn) {
+            String groupName = etGroup.getText().toString().trim();
+            String id = groupsDB.push().getKey();
+            Groups group = new Groups(groupName,id,mAuth.getCurrentUser().getUid());
+
+            groupsDB.child(id).setValue(group).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(getActivity(),"Group successfully created.",Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(getActivity(), "Group failed to be created", Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
+
+            groupsDB.child(id).child("members").child(mAuth.getCurrentUser().getUid()).setValue("Group Leader");
+
+        }
     }
 }
