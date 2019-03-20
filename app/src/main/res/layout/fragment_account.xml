@@ -6,12 +6,23 @@
     android:orientation="vertical"
     android:background="#303030">
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/setup_profile_image"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="22dp"
+        android:src="@drawable/studylogo" />
+
+
     <TextView
         android:id="@+id/tvUsername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="username"
         android:textAlignment="center"
+        android:textColor="@android:color/white"
         android:textStyle="bold" />
 
     <TextView
@@ -19,28 +30,48 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="email"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textColor="@android:color/white" />
 
     <TextView
         android:id="@+id/tvAge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Age"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Gender: N/A"
+        android:textAlignment="center"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Description: N/A"
+        android:textAlignment="center"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Birthday: N/A"
+        android:textAlignment="center"
+        android:textColor="@android:color/white" />
 
     <TextView
         android:id="@+id/tvRating"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Rating"
-        android:textAlignment="center" />
-
-    <TextView
-        android:id="@+id/loginTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="My Account:"
-        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large" />
+        android:textAlignment="center"
+        android:textColor="@android:color/white" />
 
 
     <LinearLayout
@@ -63,10 +94,12 @@
             android:spinnerMode="dropdown">
 
         </Spinner>
+
         <Spinner
             android:id="@+id/month_menu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:entries="@array/month_array"
             android:spinnerMode="dropdown">
 
         </Spinner>
