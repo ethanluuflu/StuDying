@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,11 +57,20 @@ public class GroupFragment extends Fragment implements View.OnClickListener{
             String id = groupsDB.push().getKey();
             Groups group = new Groups(groupName,id,mAuth.getCurrentUser().getUid());
 
+            if(TextUtils.isEmpty(groupName)){
+                //email is empty
+                Toast.makeText(getActivity(), "Please enter a group name", Toast.LENGTH_SHORT).show();
+                //stop function execution
+                return;
+            }
+
             groupsDB.child(id).setValue(group).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()) {
-                        Toast.makeText(getActivity(),"Group successfully created.",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(),"Group successfully created",Toast.LENGTH_LONG).show();
+                        Intent i = new Intent(getActivity(),tempGroupList.class);
+                        startActivity(i);
                     } else {
                         Toast.makeText(getActivity(), "Group failed to be created", Toast.LENGTH_LONG).show();
                     }

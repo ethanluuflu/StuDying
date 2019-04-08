@@ -1,5 +1,6 @@
 package com.example.ethan.studying;
 
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -37,7 +38,7 @@ public class tempGroupList extends AppCompatActivity {
         groups = new ArrayList<>();
         groupsDB = FirebaseDatabase.getInstance().getReference("Groups");
 
-       listViewGroups.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listViewGroups.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 final Groups group = groups.get(i);
@@ -120,6 +121,7 @@ public class tempGroupList extends AppCompatActivity {
                     groups.add(group);
                 }
                 groupList groupListAdapter = new groupList(tempGroupList.this, groups);
+                listViewGroups.setBackgroundColor(Color.WHITE);
                 listViewGroups.setAdapter(groupListAdapter);
             }
 

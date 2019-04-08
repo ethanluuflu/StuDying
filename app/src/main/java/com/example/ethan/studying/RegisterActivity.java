@@ -62,23 +62,30 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 //            return;
 //        }
 
+        if(TextUtils.isEmpty(name)){
+            //email is empty
+            Toast.makeText(this, "Please enter your name", Toast.LENGTH_SHORT).show();
+            //stop function execution
+            return;
+        }
+
         if(TextUtils.isEmpty(email)){
             //email is empty
-            Toast.makeText(this, "Please enter your email address.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please enter your email address", Toast.LENGTH_SHORT).show();
             //stop function execution
             return;
         }
 
         if(TextUtils.isEmpty(password)){
             //password is empty
-            Toast.makeText(this, "Please enter your password.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please enter your password", Toast.LENGTH_SHORT).show();
             //stop function execution
             return;
         }
 
         if(!etPassword.getText().toString().trim().equals(etConfirmPassword.getText().toString().trim())){
             //passwords do not match
-            Toast.makeText(this, "Passwords do not match.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show();
             //stop function execution
             return;
         }

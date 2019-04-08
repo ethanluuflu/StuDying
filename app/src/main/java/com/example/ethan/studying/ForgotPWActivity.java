@@ -4,6 +4,7 @@ package com.example.ethan.studying;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,13 +34,19 @@ public class ForgotPWActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View view) {
         if (view == reset) {
+            if(TextUtils.isEmpty(email.getText().toString().trim())){
+                //email is empty
+                Toast.makeText(this, "Please enter your email address", Toast.LENGTH_SHORT).show();
+                //stop function execution
+                return;
+            }
             mAuth.sendPasswordResetEmail(email.getText().toString().trim()).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()) {
-                        Toast.makeText(getApplicationContext(), "Password Reset Email has been sent.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Password Reset Email has been sent", Toast.LENGTH_LONG).show();
                     } else {
-                        Toast.makeText(getApplicationContext(), "Enter a valid email", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Please enter a valid email address", Toast.LENGTH_LONG).show();
                     }
                 }
             });
