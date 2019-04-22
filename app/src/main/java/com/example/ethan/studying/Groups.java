@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Groups{
-    private String groupID;
     private String groupName;
+    private String groupID;
     private Map<String, String> members;
 
     public Groups(){
