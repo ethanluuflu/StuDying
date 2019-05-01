@@ -40,11 +40,11 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class AccountFragment extends Fragment implements View.OnClickListener{
     private CircleImageView profileImage;
-    private Button Saveinformationbutton;
+//    private Button Saveinformationbutton;
     private ProgressDialog loadingBar;
     private TextView viewUser, viewEmail, viewAge, viewRating;
     private Button changePW, updateEmail, signOut;
-    private Spinner dayMenu,monthMenu,yearMenu;
+//    private Spinner dayMenu,monthMenu,yearMenu;
     private FirebaseAuth mAuth;
     private FirebaseUser user;
     private StorageReference UserProfileImageRef;
@@ -150,7 +150,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
 
             if (resultCode == Activity.RESULT_OK) {
                 loadingBar.setTitle("Profile Image");
-                loadingBar.setMessage("Please wait, while we updating your profile image...");
+                loadingBar.setMessage("Updating your profile image...");
                 loadingBar.show();
                 loadingBar.setCanceledOnTouchOutside(true);
 
