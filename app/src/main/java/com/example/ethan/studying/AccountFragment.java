@@ -40,11 +40,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class AccountFragment extends Fragment implements View.OnClickListener{
     private CircleImageView profileImage;
-    private Button Saveinformationbutton;
     private ProgressDialog loadingBar;
-    private TextView viewUser, viewEmail, viewAge, viewRating;
+    private TextView viewUser, viewEmail, viewRating;
     private Button changePW, updateEmail, signOut;
-    private Spinner dayMenu,monthMenu,yearMenu;
     private FirebaseAuth mAuth;
     private FirebaseUser user;
     private StorageReference UserProfileImageRef;
@@ -63,7 +61,6 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
 
         viewUser = view.findViewById(R.id.tvUsername);
         viewEmail = view.findViewById(R.id.tvEmail);
-        viewAge = view.findViewById(R.id.tvAge);
         viewRating = view.findViewById(R.id.tvRating);
 
         changePW = view.findViewById(R.id.changePWBtn);
@@ -74,27 +71,6 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
 
         signOut = view.findViewById(R.id.signOutBtn);
         signOut.setOnClickListener(this);
-
-        dayMenu = view.findViewById(R.id.day_menu);
-        monthMenu = view.findViewById(R.id.month_menu);
-        yearMenu = view.findViewById(R.id.year_menu);
-
-        ArrayList<String> days = new ArrayList<String>();
-        days.add("Select Day");
-        for(int i = 1;i< 32;i++) {
-            days.add(Integer.toString(i));
-        }
-        ArrayAdapter<String> dayAdapter = new ArrayAdapter<String>(view.getContext(),android.R.layout.simple_spinner_dropdown_item,days);
-        dayMenu.setAdapter(dayAdapter);
-
-
-        ArrayList<String> years = new ArrayList<String>();
-        years.add("Select Year");
-        for(int i = 1960;i< 2020;i++) {
-            years.add(Integer.toString(i));
-        }
-        ArrayAdapter<String> yearAdapter = new ArrayAdapter<String>(view.getContext(),android.R.layout.simple_spinner_dropdown_item,years);
-        yearMenu.setAdapter(yearAdapter);
 
         profileImage = (CircleImageView) view.findViewById(R.id.setup_profile_image);
         loadingBar = new ProgressDialog(getActivity());
@@ -215,12 +191,6 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
                 User currUser = dataSnapshot.getValue(User.class);
                 viewUser.setText("Username: " + currUser.getUser());
                 viewEmail.setText("Email Address: " + currUser.getEmail());
-
-                if (dataSnapshot.hasChild("age")) {
-                    viewAge.setText("Age: " + currUser.getAge());
-                } else {
-                    viewAge.setText("Age: NULL");
-                }
 
                 if (dataSnapshot.hasChild("rating")) {
                     viewRating.setText("Average Rating: " + currUser.getRating());

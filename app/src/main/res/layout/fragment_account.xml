@@ -34,84 +34,12 @@
         android:textColor="@android:color/white" />
 
     <TextView
-        android:id="@+id/tvAge"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Age"
-        android:textAlignment="center"
-        android:textColor="@android:color/white" />
-
-    <TextView
-        android:id="@+id/textView12"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Gender: N/A"
-        android:textAlignment="center"
-        android:textColor="@android:color/white" />
-
-    <TextView
-        android:id="@+id/textView11"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Description: N/A"
-        android:textAlignment="center"
-        android:textColor="@android:color/white" />
-
-    <TextView
-        android:id="@+id/textView13"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Birthday: N/A"
-        android:textAlignment="center"
-        android:textColor="@android:color/white" />
-
-    <TextView
         android:id="@+id/tvRating"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Rating"
         android:textAlignment="center"
         android:textColor="@android:color/white" />
-
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Birthday:"
-            android:textColor="@android:color/white"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <Spinner
-            android:id="@+id/day_menu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:spinnerMode="dropdown">
-
-        </Spinner>
-
-        <Spinner
-            android:id="@+id/month_menu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:entries="@array/month_array"
-            android:spinnerMode="dropdown">
-
-        </Spinner>
-        <Spinner
-            android:id="@+id/year_menu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:spinnerMode="dropdown">
-
-        </Spinner>
-
-    </LinearLayout>
 
     <Button
         android:id="@+id/changePWBtn"
@@ -130,17 +58,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sign Out" />
-
-    <Button
-        android:id="@+id/deleteBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Delete Account" />
-
-    <Button
-        android:id="@+id/updateAge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Update Age" />
 
 </LinearLayout>
