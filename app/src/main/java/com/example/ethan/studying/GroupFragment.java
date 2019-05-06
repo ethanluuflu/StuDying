@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,22 +54,25 @@ public class GroupFragment extends Fragment implements View.OnClickListener{
             String groupSubject = etGroupSubject.getText().toString().trim();
             String groupDescription = etGroupDescription.getText().toString().trim();
 
-            String id = groupsDB.push().getKey();
-            Groups group = new Groups(id,groupName,groupSubject,groupDescription);
+            if(TextUtils.isEmpty(groupName) || TextUtils.isEmpty(groupSubject) || TextUtils.isEmpty(groupDescription)){
+                Toast.makeText(getActivity(),"Please fill in all required fields",Toast.LENGTH_SHORT).show();            }
+            else {
+                String id = groupsDB.push().getKey();
+                Groups group = new Groups(id,groupName,groupSubject,groupDescription);
 
-            groupsDB.child(id).setValue(group).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    if (task.isSuccessful()) {
-                        Toast.makeText(getActivity(),"Group successfully created.",Toast.LENGTH_LONG).show();
-                    } else {
-                        Toast.makeText(getActivity(), "Group failed to be created", Toast.LENGTH_LONG).show();
+                groupsDB.child(id).setValue(group).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(getActivity(),"Group successfully created",Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(getActivity(), "Group failed to be created", Toast.LENGTH_LONG).show();
+                        }
                     }
-                }
-            });
+                });
 
-            groupsDB.child(id).child("members").child(mAuth.getCurrentUser().getUid()).setValue("Group Leader");
-
+                groupsDB.child(id).child("members").child(mAuth.getCurrentUser().getUid()).setValue("Group Leader");
+            }
         }
     }
 }

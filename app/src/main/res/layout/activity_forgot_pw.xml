@@ -19,7 +19,7 @@
         android:layout_marginBottom="8dp"
         android:background="#55000000"
         android:ems="10"
-        android:hint=" Enter email address"
+        android:hint="Email Address"
         android:inputType="textPersonName"
         android:padding="16dp"
         android:textColor="#fff"
