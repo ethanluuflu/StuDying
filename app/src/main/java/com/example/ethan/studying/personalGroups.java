@@ -1,11 +1,9 @@
 package com.example.ethan.studying;
 
-import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,40 +18,26 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class tempGroupList extends AppCompatActivity {
-    TextView titleSearch;
+public class personalGroups extends AppCompatActivity {
     ListView listViewGroups;
     List<Groups> groups;
     private DatabaseReference groupsDB;
-    String query;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_temp_group_list);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("Searching..");
-        setSupportActionBar(toolbar);
-        toolbar.setBackgroundColor(Color.parseColor("#FFDF00"));
-        toolbar.setTitleTextColor(Color.parseColor("#303030"));
-        titleSearch = findViewById(R.id.titleSearch);
-
-        query = getIntent().getStringExtra("Query");
-
-        titleSearch.setText("Searching for " + query + "...");
-
         listViewGroups = findViewById(R.id.ListViewGroups);
         groups = new ArrayList<>();
         groupsDB = FirebaseDatabase.getInstance().getReference("Groups");
 
-       listViewGroups.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listViewGroups.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 final Groups group = groups.get(i);
@@ -125,19 +109,18 @@ public class tempGroupList extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        Query groupQuery = FirebaseDatabase.getInstance().getReference("Groups").orderByChild("groupName").startAt(query).endAt(query+"\uf8ff");
-        groupQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+
+        groupsDB.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 groups.clear();
-                if (dataSnapshot.exists()) {
-                    for (DataSnapshot groupSnapshot : dataSnapshot.getChildren()) {
-                        Groups group = groupSnapshot.getValue(Groups.class);
-                        groups.add(group);
-                    }
-                    groupList groupListAdapter = new groupList(tempGroupList.this, groups);
-                    listViewGroups.setAdapter(groupListAdapter);
+
+                for(DataSnapshot groupSnapshot : dataSnapshot.getChildren()) {
+                    Groups group = groupSnapshot.getValue(Groups.class);
+                    groups.add(group);
                 }
+                groupList groupListAdapter = new groupList(personalGroups.this, groups);
+                listViewGroups.setAdapter(groupListAdapter);
             }
 
             @Override

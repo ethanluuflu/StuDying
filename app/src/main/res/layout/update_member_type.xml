@@ -9,6 +9,7 @@
         android:id="@+id/memberQuestion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:text="TextView"
         android:textAlignment="center"
         android:textSize="24sp" />
@@ -18,6 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_marginTop="5dp"
         android:gravity="center">
 
         <Button

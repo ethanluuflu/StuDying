@@ -41,10 +41,12 @@ public class groupList extends ArrayAdapter<Groups> {
         View listViewItem = inflater.inflate(R.layout.activity_group_list, null, true);
 
         TextView groupName = (TextView) listViewItem.findViewById(R.id.tvGroupName);
+        TextView groupSubject = listViewItem.findViewById(R.id.tvSubject);
         final TextView memberType = listViewItem.findViewById(R.id.tvMemberType);
 
         Groups group = groups.get(position);
         groupName.setText(group.getGroupName());
+        groupSubject.setText("Subject: "+ group.getGroupSubject());
         user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseDatabase.getInstance().getReference("Groups").child(group.getGroupID()).
                  child("members").child(user.getUid()).addValueEventListener(new ValueEventListener() {

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="10dp"
     tools:context=".groupList">
 
     <TextView
@@ -12,11 +13,34 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Group1"
+        android:textColor="@android:color/white"
         android:textSize="24sp" />
 
-    <TextView
-        android:id="@+id/tvMemberType"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvMemberType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
+            android:text="Group Leader"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/tvSubject"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Subject: Math"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Group Leader" />
+        android:layout_height="1dp"
+        android:layout_below="@id/groupSubject"
+        android:layout_marginTop="4dp"
+        android:background="#FFFFFF" />
 </LinearLayout>

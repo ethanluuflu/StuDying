@@ -26,10 +26,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GroupFragment extends Fragment implements View.OnClickListener{
-    private EditText etGroup;
+    private EditText etGroupName, etGroupSubject, etGroupDescription;
     private Button createGroupBtn;
-    private Button myGroupBtn;
-
 
     private DatabaseReference groupsDB;
     private FirebaseAuth mAuth;
@@ -38,23 +36,25 @@ public class GroupFragment extends Fragment implements View.OnClickListener{
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = (View) inflater.inflate(R.layout.fragment_group, container, false);
-        etGroup = view.findViewById(R.id.etGroupName);
+        etGroupName = view.findViewById(R.id.etGroupName);
+        etGroupSubject = view.findViewById(R.id.etGroupSubject);
+        etGroupDescription = view.findViewById(R.id.etGroupDescription);
         createGroupBtn = view.findViewById(R.id.createGroupBtn);
         createGroupBtn.setOnClickListener(this);
-        myGroupBtn = view.findViewById(R.id.myGroupBtn);
-        myGroupBtn.setOnClickListener(this);
         groupsDB = FirebaseDatabase.getInstance().getReference("Groups");
         mAuth = FirebaseAuth.getInstance();
-
         return view;
     }
 
     @Override
     public void onClick(View view) {
         if (view == createGroupBtn) {
-            String groupName = etGroup.getText().toString().trim();
+            String groupName = etGroupName.getText().toString().trim();
+            String groupSubject = etGroupSubject.getText().toString().trim();
+            String groupDescription = etGroupDescription.getText().toString().trim();
+
             String id = groupsDB.push().getKey();
-            Groups group = new Groups(groupName,id,mAuth.getCurrentUser().getUid());
+            Groups group = new Groups(id,groupName,groupSubject,groupDescription);
 
             groupsDB.child(id).setValue(group).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
@@ -69,10 +69,6 @@ public class GroupFragment extends Fragment implements View.OnClickListener{
 
             groupsDB.child(id).child("members").child(mAuth.getCurrentUser().getUid()).setValue("Group Leader");
 
-        }
-        if (view == myGroupBtn) {
-            Intent i = new Intent(getActivity(),tempGroupList.class);
-            startActivity(i);
         }
     }
 }

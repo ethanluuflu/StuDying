@@ -1,6 +1,7 @@
 package com.example.ethan.studying;
 
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,7 +17,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class ForgotPWActivity extends AppCompatActivity implements View.OnClickListener{
 
     private EditText email;
-    private Button reset;
+    private Button reset, cancel;
     private FirebaseAuth mAuth;
 
     @Override
@@ -25,7 +26,9 @@ public class ForgotPWActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_forgot_pw);
         email = findViewById(R.id.etEmail);
         reset = findViewById(R.id.resetBtn);
+        cancel = findViewById(R.id.cancelResetBtn);
         reset.setOnClickListener(this);
+        cancel.setOnClickListener(this);
         mAuth = FirebaseAuth.getInstance();
 
     }
@@ -43,6 +46,11 @@ public class ForgotPWActivity extends AppCompatActivity implements View.OnClickL
                     }
                 }
             });
+        }
+        if (view == cancel) {
+            finish();
+            Intent i = new Intent(ForgotPWActivity.this, LoginActivity.class);
+            startActivity(i);
         }
     }
 }

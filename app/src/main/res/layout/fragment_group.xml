@@ -5,7 +5,7 @@
     android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
+    android:gravity="center_horizontal"
     android:layout_height="match_parent"
     android:background="#303030">
 
@@ -13,11 +13,8 @@
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="92dp"
-        android:layout_marginEnd="64dp"
-        android:layout_marginBottom="15dp"
-        android:text="Create a New Study Group"
+        android:layout_marginTop="20dp"
+        android:text="Create Study Group"
         android:textAlignment="center"
         android:textColor="@android:color/white"
         android:textSize="24sp"
@@ -25,32 +22,55 @@
 
     <EditText
         android:id="@+id/etGroupName"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="99dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="99dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Enter Group Name"
+        android:padding="16dp"
+        android:background="#55000000"
+        android:hint="Enter Group Name"
+        android:textColorHint="#ffffff"
         android:textAlignment="textStart"
-        android:textColor="@android:color/white" />
+        android:textColor="#ffffff" />
+
+    <EditText
+        android:id="@+id/etGroupSubject"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:background="#55000000"
+        android:hint="Enter Group Subject"
+        android:padding="16dp"
+        android:textColorHint="#ffffff"
+        android:textAlignment="textStart"
+        android:layout_marginBottom="20dp"
+        android:textColor="#ffffff" />
+
+    <EditText
+        android:id="@+id/etGroupDescription"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:background="#55000000"
+        android:hint="What kind of group is this?"
+        android:gravity="top|left"
+        android:textColor="#ffffff"
+        android:textColorHint="#ffffff"
+        android:layout_marginBottom="20dp"
+        android:inputType="textMultiLine"
+        android:lines="6"
+        android:scrollbars="vertical"
+        android:scrollHorizontally="false"/>
 
     <Button
         android:id="@+id/createGroupBtn"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="17dp"
-        android:text="Create Group" />
+        android:layout_marginBottom="20dp"
+        android:text="Create Group"
+        android:textColor="#303030"
+        android:background="@drawable/roundedbutton"/>
 
-    <Button
-        android:id="@+id/myGroupBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Groups List" />
 
 </LinearLayout>

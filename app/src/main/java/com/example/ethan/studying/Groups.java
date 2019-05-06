@@ -7,16 +7,28 @@ import java.util.Map;
 public class Groups{
     private String groupID;
     private String groupName;
-    private Map<String, String> members;
-
+    private String groupSubject;
+    private String groupDescription;
     public Groups(){
     }
 
+    public Groups(String groupName) {
+        this.groupName = groupName;
+        this.groupSubject = "Math";
+        this.groupDescription = "This group is great! Recommended";
+    }
     public Groups(String groupName, String groupID, String user) {
         this.groupName=groupName;
         this.groupID=groupID;
-        Map<String,Object> members = new HashMap<String,Object>();
-        members.put(user, "Group Leader");
+        this.groupSubject = "Math";
+        this.groupDescription = "This group is great! Recommended";
+    }
+
+    public Groups(String groupID, String groupName, String groupSubject, String groupDescription) {
+        this.groupID = groupID;
+        this.groupName = groupName;
+        this.groupSubject = groupSubject;
+        this.groupDescription = groupDescription;
     }
 
     //Getters and Setters
@@ -36,30 +48,19 @@ public class Groups{
         this.groupID = groupID;
     }
 
-    public Map<String, String> getMembers() {
-        return members;
+    public String getGroupSubject() {
+        return groupSubject;
     }
 
-    public void setMembers(Map<String, String> members) {
-        this.members = members;
+    public void setGroupSubject(String groupSubject) {
+        this.groupSubject = groupSubject;
     }
 
-    //add members
-    public void addMembers(String user) {
-        members.put(user, "Group Member");
+    public String getGroupDescription() {
+        return groupDescription;
     }
 
-    //Update member type
-    public void setMemberType(String user, String userType) {
-        if(members.containsKey(user)){
-            members.put(user,userType);
-        } else {
-            System.out.println("User does not exist");
-        }
-    }
-
-    public void assignLeader(String oldLeader, String newLeader) {
-        members.put(oldLeader, "Group Member");
-        members.put(newLeader, "Group Leader");
+    public void setGroupDescription(String groupDescription) {
+        this.groupDescription = groupDescription;
     }
 }
