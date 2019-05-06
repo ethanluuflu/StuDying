@@ -9,7 +9,8 @@
 
     <EditText
         android:id="@+id/etEmail"
-        android:drawableLeft="@drawable/ic_email"
+        android:drawableStart="@drawable/ic_email"
+        android:drawablePadding="5dp"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"

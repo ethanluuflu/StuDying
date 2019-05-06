@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,130 +9,91 @@
     android:background="#303030"
     tools:context="com.example.ethan.studying.RegisterActivity">
 
-
-    <EditText
-        android:id="@+id/emailET"
-        android:drawableLeft="@drawable/ic_email"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="#55000000"
-        android:hint=" Student Email"
-        android:inputType="textPersonName"
-        android:padding="16dp"
-        android:textColor="#fff"
-        android:textColorHint="#fff"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.575" />
-
-    <EditText
-        android:id="@+id/passwordET"
-        android:drawableLeft="@drawable/ic_password"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-
-        android:layout_below="@+id/userNameEditText"
-        android:layout_alignStart="@+id/userNameEditText"
-        android:layout_alignLeft="@+id/userNameEditText"
-        android:layout_marginTop="8dp"
-        android:background="#55000000"
-        android:hint=" Password"
-        android:inputType="textPassword"
-        android:padding="16dp"
-        android:textColor="#fff"
-        android:textColorHint="#fff"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.674" />
-
-    <EditText
-        android:id="@+id/confirmPasswordET"
-        android:drawableLeft="@drawable/ic_password"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-
-        android:layout_below="@+id/userNameEditText"
-        android:layout_alignStart="@+id/userNameEditText"
-        android:layout_alignLeft="@+id/userNameEditText"
-        android:layout_marginTop="8dp"
-        android:background="#55000000"
-        android:hint=" Confirm Password"
-        android:inputType="textPassword"
-        android:padding="16dp"
-        android:textColor="#fff"
-        android:textColorHint="#fff"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.782" />
+    <ImageView
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:id="@+id/imageView"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_gravity="center"
+        app:srcCompat="@drawable/studylogo" >
+    </ImageView>
 
     <EditText
         android:id="@+id/nameET"
-        android:drawableLeft="@drawable/ic_user"
+        android:drawableStart="@drawable/ic_user"
+        android:drawablePadding="5dp"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="#55000000"
-        android:hint=" Name"
+        android:layout_marginBottom="10dp"
+        android:layout_gravity="center"
+        android:ems="10"
+        android:inputType="textPersonName"
         android:padding="16dp"
-        android:textColor="#fff"
-        android:textColorHint="#fff"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.467" />
+        android:background="#55000000"
+        android:hint="Name"
+        android:textColorHint="#ffffff"
+        android:textColor="#ffffff" />
+
+    <EditText
+        android:id="@+id/emailET"
+        android:drawableStart="@drawable/ic_email"
+        android:drawablePadding="5dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_gravity="center"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:padding="16dp"
+        android:background="#55000000"
+        android:hint="Student Email"
+        android:textColorHint="#ffffff"
+        android:textColor="#ffffff" />
+
+    <EditText
+        android:id="@+id/passwordET"
+        android:drawableStart="@drawable/ic_password"
+        android:drawablePadding="5dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_gravity="center"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:padding="16dp"
+        android:background="#55000000"
+        android:hint="Password"
+        android:textColorHint="#ffffff"
+        android:textColor="#ffffff">
+    </EditText>
+
+    <EditText
+        android:id="@+id/confirmPasswordET"
+        android:drawableStart="@drawable/ic_password"
+        android:drawablePadding="5dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_gravity="center"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:padding="16dp"
+        android:background="#55000000"
+        android:hint="Confirm Password"
+        android:textColorHint="#ffffff"
+        android:textColor="#ffffff">
+    </EditText>
 
     <Button
         android:id="@+id/registerBT"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/roundedbutton"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
+        android:layout_marginBottom="25dp"
+        android:layout_gravity="center"
         android:text="Register"
-        android:textColor="#000"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.905" />
+        android:textColor="#303030"
+        android:background="@drawable/roundedbutton">
+    </Button>
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="254dp"
-        android:layout_height="228dp"
-        android:layout_marginStart="59dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="59dp"
-        android:layout_marginBottom="21dp"
-        app:layout_constraintBottom_toTopOf="@+id/userNameEditText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/studylogo" />
-</android.support.constraint.ConstraintLayout>
-
+</LinearLayout>
