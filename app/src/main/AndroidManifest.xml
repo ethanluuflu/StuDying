@@ -19,7 +19,6 @@
         <activity android:name=".TestForum" />
         <activity android:name=".UpdateAgeActivity" />
         <activity android:name=".tempGroupList" />
-        <activity android:name=".groupList" />
         <activity android:name=".RatingActivity" />
         <activity android:name=".ChangePWActivity" />
         <activity android:name=".UpdateEmailActivity" />

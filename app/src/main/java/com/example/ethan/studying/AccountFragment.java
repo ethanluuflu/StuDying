@@ -189,13 +189,13 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 //Grab user object from database
                 User currUser = dataSnapshot.getValue(User.class);
-                viewUser.setText("Username: " + currUser.getUser());
-                viewEmail.setText("Email Address: " + currUser.getEmail());
+                viewUser.setText(currUser.getUser());
+                viewEmail.setText(currUser.getEmail());
 
                 if (dataSnapshot.hasChild("rating")) {
-                    viewRating.setText("Average Rating: " + currUser.getRating());
+                    viewRating.setText("" + currUser.getRating());
                 } else {
-                    viewRating.setText("Average Rating: N/A");
+                    viewRating.setText("4");
 
                 }
             }

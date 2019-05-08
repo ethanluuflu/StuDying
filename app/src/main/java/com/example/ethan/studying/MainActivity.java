@@ -23,6 +23,9 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawer;
@@ -32,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Button accountBtn;
     private Button supportBtn;
     private Button aboutBtn;
+    private CircleImageView navProfileImage;
 
 //    private TextView emailText;
 
@@ -68,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        }
         View header = navigationView.getHeaderView(0);
         viewEmail = header.findViewById(R.id.txtViewEmail);
+        navProfileImage = header.findViewById(R.id.nav_profile_image);
     }
 
 
@@ -156,6 +161,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) { //test code for errors
+                    if (dataSnapshot.hasChild("profileimage")) {
+
+                        String image = dataSnapshot.child("profileimage").getValue().toString();
+                        Picasso.get().load(image).placeholder(R.mipmap.ic_launcher_round).into(navProfileImage);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
             }
         });

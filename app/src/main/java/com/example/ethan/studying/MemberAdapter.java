@@ -9,16 +9,20 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.squareup.picasso.Picasso;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.StorageReference;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Calendar;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.MemberViewHolder> {
     private Context mCtx;
@@ -100,6 +104,24 @@ public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.MemberView
             holder.mDelete.setVisibility(View.GONE);
             holder.mAdd.setVisibility(View.INVISIBLE);
         }
+
+        FirebaseDatabase.getInstance().getReference("Users").child(item).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) { //test code for errors
+                    if (dataSnapshot.hasChild("profileimage")) {
+
+                        String image = dataSnapshot.child("profileimage").getValue().toString();
+                        Picasso.get().load(image).placeholder(R.mipmap.ic_launcher_round).into(holder.profileImage);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Override
@@ -112,6 +134,7 @@ public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.MemberView
         public TextView mMemberStatus;
         public ImageButton mDelete;
         public ImageButton mAdd;
+        public CircleImageView profileImage;
 
         public MemberViewHolder(View itemView) {
             super(itemView);
@@ -119,6 +142,7 @@ public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.MemberView
             mMemberStatus = itemView.findViewById(R.id.memberStatus);
             mDelete = itemView.findViewById(R.id.deleteMember);
             mAdd = itemView.findViewById(R.id.addFriend);
+            profileImage = itemView.findViewById(R.id.member_profile_image);
 
             mDelete.setOnClickListener(new View.OnClickListener() {
                 @Override

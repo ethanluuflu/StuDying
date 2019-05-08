@@ -42,7 +42,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageA
     @Override
     public void onBindViewHolder(@NonNull final MessageAdapterViewHolder holder, int position) {
         final Message message = messages.get(position);
-        FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("user").addValueEventListener(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference("Users").child(message.getUserID()).child("user").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 holder.tvTitle.setText(dataSnapshot.getValue(String.class) + ": " + message.getMessage());

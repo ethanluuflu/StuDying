@@ -22,7 +22,7 @@ public class Post {
         this.userID = userID;
         Calendar c = Calendar.getInstance();
         String[] month = {"January","February", "March", "April","May", "June", "July", "August", "September", "October", "November", "December"};
-        this.time = month[c.get(Calendar.MONTH)-1] + " " + String.valueOf(c.get(Calendar.DAY_OF_MONTH)) + ", " + String.valueOf(c.get(Calendar.YEAR));
+        this.time = month[c.get(Calendar.MONTH)] + " " + String.valueOf(c.get(Calendar.DAY_OF_MONTH)) + ", " + String.valueOf(c.get(Calendar.YEAR));
     }
 
     public String getPostID() {

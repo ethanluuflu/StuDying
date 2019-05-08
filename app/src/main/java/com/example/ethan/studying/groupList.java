@@ -1,6 +1,7 @@
 package com.example.ethan.studying;
 
 import android.app.Activity;
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
