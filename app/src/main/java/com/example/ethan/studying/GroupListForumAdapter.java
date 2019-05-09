@@ -19,6 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+//Adapter class for group list to go into the forum
 public class GroupListForumAdapter extends RecyclerView.Adapter<GroupListForumAdapter.GroupListForumViewHolder> {
 
     private Context mCtx;
@@ -47,6 +48,7 @@ public class GroupListForumAdapter extends RecyclerView.Adapter<GroupListForumAd
         return new GroupListForumAdapter.GroupListForumViewHolder(view);
     }
 
+    //Updates the layout with data for their respective groups
     @Override
     public void onBindViewHolder(@NonNull final GroupListForumAdapter.GroupListForumViewHolder holder, int position) {
         Groups group = groups.get(position);
@@ -72,6 +74,7 @@ public class GroupListForumAdapter extends RecyclerView.Adapter<GroupListForumAd
         return groups.size();
     }
 
+    //Class to attach variables to the layout components
     class GroupListForumViewHolder extends RecyclerView.ViewHolder {
         public TextView groupName;
         public TextView groupSubject;
@@ -87,6 +90,7 @@ public class GroupListForumAdapter extends RecyclerView.Adapter<GroupListForumAd
             mForum = itemView.findViewById(R.id.forumBtn);
             mDelete = itemView.findViewById(R.id.leaveBtn);
 
+            //Redirects user to forum page for group on click
             mForum.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -99,6 +103,7 @@ public class GroupListForumAdapter extends RecyclerView.Adapter<GroupListForumAd
                 }
             });
 
+            //Allows user to leave the group upon clicking the trash can button.
             mDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

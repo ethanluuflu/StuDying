@@ -21,11 +21,13 @@ import org.w3c.dom.Text;
 
 import java.util.List;
 
+//Adapter class for the messages in the recyclerview object
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageAdapterViewHolder>{
     Context context;
     List<Message> messages;
     DatabaseReference messageDb;
 
+    //Constructor
     public MessageAdapter(Context context, List<Message> messages, DatabaseReference messageDb) {
         this.context = context;
         this.messageDb = messageDb;
@@ -39,6 +41,9 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageA
         return new MessageAdapterViewHolder(view);
     }
 
+    //With the data from the arraylist, pulls the respective message from Firebase
+    //Updates the layout with information regarding the message
+    //Display who sent the message as well as content of message
     @Override
     public void onBindViewHolder(@NonNull final MessageAdapterViewHolder holder, int position) {
         final Message message = messages.get(position);
@@ -68,6 +73,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageA
         return messages.size();
     }
 
+    //Class to attach variables to layout components
     public class MessageAdapterViewHolder extends RecyclerView.ViewHolder {
         TextView tvTitle;
         ImageButton ibDelete;

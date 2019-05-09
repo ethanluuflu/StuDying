@@ -14,12 +14,17 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
+/**
+ * Activity for User forgetting Password
+ * Allows user to reset their password
+ */
 public class ForgotPWActivity extends AppCompatActivity implements View.OnClickListener{
 
     private EditText email;
     private Button reset, cancel;
     private FirebaseAuth mAuth;
 
+    //Initiates the variables and sets them equal to their layout counterparts
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +40,7 @@ public class ForgotPWActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onClick(View view) {
+        //Sends a password reset email to the email associated with the account
         if (view == reset) {
             mAuth.sendPasswordResetEmail(email.getText().toString().trim()).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
@@ -47,6 +53,7 @@ public class ForgotPWActivity extends AppCompatActivity implements View.OnClickL
                 }
             });
         }
+        //Go back to login if user changes their mind
         if (view == cancel) {
             finish();
             Intent i = new Intent(ForgotPWActivity.this, LoginActivity.class);

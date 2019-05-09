@@ -18,7 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
-
+//Register class that handles the registration for new account within the application
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
     private Button registerButton;
     private EditText etName;
@@ -32,6 +32,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     private static final String TAG = "RegisterActivity";
 
+    //Launches the proper layout and attach variables to the layout components
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +51,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         registerButton.setOnClickListener(this);
     }
 
+    //Main register method
     private void registerUser(){
+        //Parses the data from the textfield
         final String name = etName.getText().toString().trim();
         final String email = etEmail.getText().toString().trim();
         String password = etPassword.getText().toString().trim();
@@ -76,6 +79,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             return;
         }
 
+        //Confirm password textfield must match new password textfield
         if(!etPassword.getText().toString().trim().equals(etConfirmPassword.getText().toString().trim())){
             //passwords do not match
             Toast.makeText(this, "Passwords do not match.", Toast.LENGTH_SHORT).show();

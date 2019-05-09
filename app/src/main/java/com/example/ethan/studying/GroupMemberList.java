@@ -18,6 +18,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+
+/**
+ * Group Member List class for MemberList button of the GroupForum
+ */
 public class GroupMemberList extends AppCompatActivity {
 
     private RecyclerView mMemberList;
@@ -31,6 +35,8 @@ public class GroupMemberList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_member_list);
+
+        //Changes the toolbar title to designate its page
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Group Members");
         setSupportActionBar(toolbar);
@@ -40,6 +46,7 @@ public class GroupMemberList extends AppCompatActivity {
 
         memberIDList = new ArrayList<>();
 
+        //Initiates the variables and attach them to the layout components
         mMemberList = findViewById(R.id.membersView);
         mDelete = findViewById(R.id.deleteMember);
         mAdd = findViewById(R.id.addFriend);
@@ -50,8 +57,10 @@ public class GroupMemberList extends AppCompatActivity {
         adapter = new MemberAdapter(this, memberIDList,groupID);
         mMemberList.setAdapter(adapter);
 
+        //Add functionality to the buttons in member list
         adapter.setOnItemClickListener(new MemberAdapter.OnItemClickListener() {
 
+            //Delete button allows group leader to remove members from group
             @Override
             public void onDeleteClick(int position) {
                 FirebaseDatabase.getInstance().getReference("Groups").child(groupID).child("members").child(memberIDList.get(position)).removeValue();
@@ -59,6 +68,9 @@ public class GroupMemberList extends AppCompatActivity {
                 adapter.notifyItemRemoved(position);
             }
 
+            //Add button to add members as a friend
+            //Friend function in Progress still.
+            //Layout for friends is here
             @Override
             public void onAddClick(int position) {
                 FirebaseDatabase.getInstance().getReference("Users").child(memberIDList.get(position)).child("user").addValueEventListener(new ValueEventListener() {
@@ -77,6 +89,7 @@ public class GroupMemberList extends AppCompatActivity {
 
     }
 
+    //Initiates the list of members by pulling data from Firebase Database
     @Override
     protected void onStart() {
         super.onStart();

@@ -1,5 +1,9 @@
 package com.example.ethan.studying;
 
+/**
+ * Message class for the messages in Group Chat
+ * Stores information about the message content and who sent the message
+ */
 public class Message {
     String message;
     String messageID;
@@ -7,12 +11,14 @@ public class Message {
 
     public Message(){}
 
+    //Constructor
     public Message(String message, String messageID, String userID) {
         this.message = message;
         this.userID = userID;
         this.messageID = messageID;
     }
 
+    //Getters and setters
     public String getMessage() {
         return message;
     }

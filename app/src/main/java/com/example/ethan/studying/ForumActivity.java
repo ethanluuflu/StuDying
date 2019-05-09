@@ -30,6 +30,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * Forum Activity for each Group
+ */
 public class ForumActivity extends AppCompatActivity {
 
     private RecyclerView mForumList;
@@ -42,7 +45,8 @@ public class ForumActivity extends AppCompatActivity {
     private EditText addPostTitle, addPostContent;
     private String groupID;
 
-
+    //Sets the layout for the Forum
+    //Updates the TextView with information regarding the designated group
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,6 +91,7 @@ public class ForumActivity extends AppCompatActivity {
             }
         });
 
+        //Sends necessary information for MemberList activity
         memberList = findViewById(R.id.membersList);
         memberList.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,6 +102,7 @@ public class ForumActivity extends AppCompatActivity {
             }
         });
 
+        //Launches chat button on click. Sends group info to activity
         chatButton = findViewById(R.id.chatBtn);
         chatButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,6 +115,8 @@ public class ForumActivity extends AppCompatActivity {
         iniPopup();
     }
 
+    //Sets up the layout for adding a new post.
+    //Starts up when user clicks the floating action button
     private void iniPopup() {
         popAddPost = new Dialog(this);
         popAddPost.setContentView(R.layout.add_post);
@@ -120,6 +128,8 @@ public class ForumActivity extends AppCompatActivity {
         addPostContent = popAddPost.findViewById(R.id.postContent);
         createPostBtn = popAddPost.findViewById(R.id.postBtn);
 
+        //Sets layout to be visible once the user clicks the Add Post button.
+        //Adds post to Firebase Database for storage
         createPostBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -143,11 +153,14 @@ public class ForumActivity extends AppCompatActivity {
         });
     }
 
+    //Insert the Post onto the List and update Layout
     public void insertPost(Post post) {
         postList.add(post);
         adapter.notifyItemInserted(0);
     }
 
+    //On start, pulls all the forum posts for the group
+    //and displays them onto list
     @Override
     protected void onStart() {
         super.onStart();

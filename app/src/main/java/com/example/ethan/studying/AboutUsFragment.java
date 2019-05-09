@@ -8,6 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+/**
+ * Simple fragment for About Us.
+ * Displays a simple text long description for the application
+ */
 public class AboutUsFragment extends Fragment {
     @Nullable
     @Override

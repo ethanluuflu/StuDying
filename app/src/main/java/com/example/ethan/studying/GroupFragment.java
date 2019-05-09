@@ -26,6 +26,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Fragment for Creating Groups
+ */
 public class GroupFragment extends Fragment implements View.OnClickListener{
     private EditText etGroupName, etGroupSubject, etGroupDescription;
     private Button createGroupBtn;
@@ -33,6 +36,7 @@ public class GroupFragment extends Fragment implements View.OnClickListener{
     private DatabaseReference groupsDB;
     private FirebaseAuth mAuth;
 
+    //Creates the variables and attaches them to their designated layout counterparts
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -49,6 +53,7 @@ public class GroupFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View view) {
+        //Creates the post and stores the data into Firebase Database
         if (view == createGroupBtn) {
             String groupName = etGroupName.getText().toString().trim();
             String groupSubject = etGroupSubject.getText().toString().trim();
@@ -60,6 +65,7 @@ public class GroupFragment extends Fragment implements View.OnClickListener{
                 String id = groupsDB.push().getKey();
                 Groups group = new Groups(id,groupName,groupSubject,groupDescription);
 
+                //Uploads new group object into Firebase
                 groupsDB.child(id).setValue(group).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {

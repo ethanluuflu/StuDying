@@ -24,6 +24,9 @@ import java.util.Calendar;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+/**
+ * Adapter class for Member List
+ */
 public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.MemberViewHolder> {
     private Context mCtx;
     private ArrayList<String> memberID;
@@ -52,6 +55,8 @@ public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.MemberView
         return new MemberAdapter.MemberViewHolder(view);
     }
 
+    //Grabs member information from the ArrayList and populate the layout with the data
+    //With the memberID in the arraylist, pull data from Firebase Database
     @Override
     public void onBindViewHolder(final MemberAdapter.MemberViewHolder holder, int position) {
         String item = memberID.get(position);
@@ -81,6 +86,7 @@ public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.MemberView
             }
         });
 
+        //Group Leader gets option to delete members
         FirebaseDatabase.getInstance().getReference("Groups").child(groupID).child("members")
                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
             @Override
@@ -105,6 +111,7 @@ public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.MemberView
             holder.mAdd.setVisibility(View.INVISIBLE);
         }
 
+        //If user has a profile image, load the profile image next to their name.
         FirebaseDatabase.getInstance().getReference("Users").child(item).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -129,6 +136,7 @@ public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.MemberView
         return memberID.size();
     }
 
+    //Class to attach variables to the layout components
     class MemberViewHolder extends RecyclerView.ViewHolder {
         public TextView mMemberName;
         public TextView mMemberStatus;
@@ -144,6 +152,7 @@ public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.MemberView
             mAdd = itemView.findViewById(R.id.addFriend);
             profileImage = itemView.findViewById(R.id.member_profile_image);
 
+            //Delete button allows member to be dropped from group
             mDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -156,6 +165,7 @@ public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.MemberView
                 }
             });
 
+            //Add button allows members to be added as friend
             mAdd.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

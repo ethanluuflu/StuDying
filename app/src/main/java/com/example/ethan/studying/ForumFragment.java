@@ -23,6 +23,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+/**
+ * Page before going to Forum
+ */
 public class ForumFragment extends Fragment {
 
     View v;
@@ -34,6 +37,7 @@ public class ForumFragment extends Fragment {
     public ForumFragment() {
     }
 
+    //Sets proper layout for Fragment
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -45,7 +49,9 @@ public class ForumFragment extends Fragment {
         return v;
     }
 
-
+    //Sets up list of groups that User is apart of
+    //Displays them on the page with the option to leave group or
+    //go to the forum for the selected group
     @Override
     public void onStart() {
         super.onStart();

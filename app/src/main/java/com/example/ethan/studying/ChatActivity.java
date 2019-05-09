@@ -29,6 +29,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Activity for Chat function for each group.
+ */
 public class ChatActivity extends AppCompatActivity implements View.OnClickListener {
     FirebaseAuth auth;
     FirebaseDatabase database;
@@ -49,6 +52,10 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         init();
     }
 
+    /**
+     * Initializes the variables and set them equal to their layout counterparts
+     * Sets the proper layout for activity
+     */
     private void init() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Group Chat");
@@ -67,6 +74,10 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    /**
+     * Sends the message that the user typed on button click
+     * @param view
+     */
     @Override
     public void onClick(View view) {
         if(!TextUtils.isEmpty(etMessage.getText().toString())) {
@@ -82,8 +93,11 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-
-
+    /**
+     * Updates the messages to be more like a realtime chat system
+     * Pulls the messages from the database
+     * and display them onto the screen via layout
+     */
     @Override
     protected void onStart() {
         super.onStart();
@@ -155,6 +169,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         messages = new ArrayList<>();
     }
 
+    //Constructs the layout for a standard message
     private void displayMessages(List<Message> messages) {
         rvMessage.setLayoutManager(new LinearLayoutManager(ChatActivity.this));
         messageAdapter = new MessageAdapter(ChatActivity.this, messages, messagedb);

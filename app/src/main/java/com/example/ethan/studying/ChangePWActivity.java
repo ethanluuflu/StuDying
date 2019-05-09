@@ -17,6 +17,9 @@ import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+/**
+ * Activity for Changing Password
+ */
 public class ChangePWActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText newPassword,oldPassword,email;
@@ -27,6 +30,8 @@ public class ChangePWActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Initiates the proper variables to their layout counterparts
         setContentView(R.layout.activity_change_pw);
         mAuth = FirebaseAuth.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -39,10 +44,12 @@ public class ChangePWActivity extends AppCompatActivity implements View.OnClickL
         updatePW.setOnClickListener(this);
     }
 
+    //Main method for changing password
     private void changePassword() {
 
         String newPW = newPassword.getText().toString().trim();
 
+        //Text fields must not be empty, else send message
         if (TextUtils.isEmpty(newPW)) {
             //email is empty
             Toast.makeText(this, "Please enter your new password", Toast.LENGTH_SHORT).show();
@@ -52,6 +59,7 @@ public class ChangePWActivity extends AppCompatActivity implements View.OnClickL
 
         AuthCredential credential = EmailAuthProvider.getCredential(email.getText().toString().trim(), oldPassword.getText().toString().trim());
 
+        //Firebase method to update the password associated with the username
         user.reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -75,6 +83,10 @@ public class ChangePWActivity extends AppCompatActivity implements View.OnClickL
 
     }
 
+    /**
+     * When user clicks the button, execute changePassword method
+     * @param view
+     */
     @Override
     public void onClick(View view) {
         if (view == updatePW) {

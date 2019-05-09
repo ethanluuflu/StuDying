@@ -23,6 +23,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Group List for the search results
+ */
 public class personalGroups extends AppCompatActivity {
     ListView listViewGroups;
     List<Groups> groups;
@@ -37,6 +40,9 @@ public class personalGroups extends AppCompatActivity {
         groups = new ArrayList<>();
         groupsDB = FirebaseDatabase.getInstance().getReference("Groups");
 
+        //If you click on the group list, launch pop up asking user to join group
+        //If already a member, display already a member
+        //Else give user option to join group
         listViewGroups.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -67,7 +73,7 @@ public class personalGroups extends AppCompatActivity {
 
     }
 
-
+    //handles the pop up layout that appears when user clicks on a group
     private void showUpdateDialog(String name,final String id, boolean isMember) {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflator = getLayoutInflater();
@@ -106,6 +112,9 @@ public class personalGroups extends AppCompatActivity {
             }
         });
     }
+
+    //Populate group list with groups from firebase
+    //Data is pulled using groupIDs in the arraylist
     @Override
     public void onStart() {
         super.onStart();

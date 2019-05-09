@@ -16,7 +16,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
+//Update email activity that handles the changing of emails associated with the logged in account
 public class UpdateEmailActivity extends AppCompatActivity implements View.OnClickListener{
 
     private EditText oldEmail,newEmail,password;
@@ -25,6 +25,7 @@ public class UpdateEmailActivity extends AppCompatActivity implements View.OnCli
     private FirebaseUser user;
     private DatabaseReference userDB;
 
+    //Attachs variables to the layout components
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +41,9 @@ public class UpdateEmailActivity extends AppCompatActivity implements View.OnCli
         update.setOnClickListener(this);
     }
 
+    //When the user clicks the update button
+    //Checks if the credentials are correct
+    //If so, authenticate the operation and change the email associated with the account
     @Override
     public void onClick(View view) {
         if(view == update) {
@@ -68,6 +72,7 @@ public class UpdateEmailActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
+    //update email in Firebase Database as updating string
     private void updateEmail(String email) {
         userDB.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .child("email").setValue(email);

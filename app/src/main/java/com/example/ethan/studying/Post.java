@@ -4,6 +4,7 @@ import com.google.firebase.database.ServerValue;
 
 import java.util.Calendar;
 
+//Post class for posts onto the group forum
 public class Post {
 
     private String postID;
@@ -15,6 +16,8 @@ public class Post {
     public Post() {
         //Empty Constructor
     }
+    //Constructor
+    //Attachs a date on creation of the post
     public Post(String postID, String title, String content, String userID) {
         this.postID = postID;
         this.title = title;
@@ -25,6 +28,7 @@ public class Post {
         this.time = month[c.get(Calendar.MONTH)] + " " + String.valueOf(c.get(Calendar.DAY_OF_MONTH)) + ", " + String.valueOf(c.get(Calendar.YEAR));
     }
 
+    //Getters and setters
     public String getPostID() {
         return postID;
     }

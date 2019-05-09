@@ -38,6 +38,9 @@ import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 import de.hdodenhof.circleimageview.CircleImageView;
 
+/**
+ * Fragment for My Account part of Navigation menu
+ */
 public class AccountFragment extends Fragment implements View.OnClickListener{
     private CircleImageView profileImage;
     private ProgressDialog loadingBar;
@@ -54,6 +57,8 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_account, container, false);
 
+        //Instantiates all the variables and attaches to their xml counterpart
+        //Also attaches an onClick listener to the buttons
         mAuth = FirebaseAuth.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();
         userDB = FirebaseDatabase.getInstance().getReference("Users").child(user.getUid());
@@ -75,7 +80,8 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
         profileImage = (CircleImageView) view.findViewById(R.id.setup_profile_image);
         loadingBar = new ProgressDialog(getActivity());
 
-
+        //Allows the profile image to be clickable
+        //Once clicked, it allows user to select a new image from their pictures
         profileImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,12 +92,13 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
             }
         });
 
+        //Updates the circle image with the picture from Firebase Storage
+        //Else, place a placeholder image in its place
         userDB.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) { //test code for errors
                     if (dataSnapshot.hasChild("profileimage")) {
-
                         String image = dataSnapshot.child("profileimage").getValue().toString();
                         Picasso.get().load(image).placeholder(R.drawable.studylogo).into(profileImage);
                     } else {
@@ -108,6 +115,9 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
         return view;
     }
 
+    /**
+     * Method that activates when User successfully selects an image to be the profile
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -124,6 +134,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
 
+            //Shows the loading bar, to signal upload of picture to Firebase
             if (resultCode == Activity.RESULT_OK) {
                 loadingBar.setTitle("Profile Image");
                 loadingBar.setMessage("Please wait, while we updating your profile image...");
@@ -132,8 +143,11 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
 
                 Uri resultUri = result.getUri();
 
+                //Destination to Firebase Storage
                 final StorageReference filePath = UserProfileImageRef.child(user.getUid() + ".jpg");
 
+                // On Success, send user back to home page
+                // Create a link to the Firebase Storage Location under the User data
                 filePath.putFile(resultUri).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                     @Override
                     public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
@@ -150,6 +164,8 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
                             Toast.makeText(getActivity(), "Profile Image stored successfully to Firebase storage...", Toast.LENGTH_SHORT).show();
 
                             final String downloadUrl = downUri.toString();
+
+                            //Create a new node under the Current user.
                             userDB.child("profileimage").setValue(downloadUrl)
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
@@ -184,6 +200,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
     public void onStart() {
         super.onStart();
 
+        //Updates the username and email if there are changes to the data
         userDB.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -207,6 +224,10 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
         });
     }
 
+    /**
+     * Handles the button onClick. Each buttons redirects to a different Activity.
+     * @param view
+     */
     @Override
     public void onClick(View view){
 

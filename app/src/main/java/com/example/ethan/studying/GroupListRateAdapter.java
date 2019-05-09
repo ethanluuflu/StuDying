@@ -19,6 +19,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+/**
+ * Adapter class for Group List displayed before rating members
+ */
 public class GroupListRateAdapter extends RecyclerView.Adapter<GroupListRateAdapter.GroupListRateViewHolder> {
 
     private Context mCtx;
@@ -39,6 +42,7 @@ public class GroupListRateAdapter extends RecyclerView.Adapter<GroupListRateAdap
         this.groups = groups;
     }
 
+    //Initializes the proper layout
     @NonNull
     @Override
     public GroupListRateAdapter.GroupListRateViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -46,12 +50,16 @@ public class GroupListRateAdapter extends RecyclerView.Adapter<GroupListRateAdap
         return new GroupListRateAdapter.GroupListRateViewHolder(view);
     }
 
+    //Attaches the proper data of the group to their respective layout locations
+    //Pulls data from Firebase Database
     @Override
     public void onBindViewHolder(@NonNull final GroupListRateAdapter.GroupListRateViewHolder holder, int position) {
         Groups group = groups.get(position);
         holder.groupName.setText(group.getGroupName());
         holder.groupSubject.setText("Subject: " + group.getGroupSubject());
 
+        //Checks if user is a member of the group by locating the user in the database
+        //If user is under the group, then member
         user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseDatabase.getInstance().getReference("Groups").child(group.getGroupID()).
                 child("members").child(user.getUid()).addValueEventListener(new ValueEventListener() {
@@ -77,6 +85,7 @@ public class GroupListRateAdapter extends RecyclerView.Adapter<GroupListRateAdap
         return groups.size();
     }
 
+    //Class to connect variables to layout components
     class GroupListRateViewHolder extends RecyclerView.ViewHolder {
         public TextView groupName;
         public TextView groupSubject;
@@ -90,6 +99,7 @@ public class GroupListRateAdapter extends RecyclerView.Adapter<GroupListRateAdap
             memberStatus = itemView.findViewById(R.id.memberStatus);
             mRate = itemView.findViewById(R.id.rateBtn);
 
+            //OnClick method for Rate button
             mRate.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

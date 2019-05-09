@@ -22,6 +22,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+/**
+ * Login Activity class that handles all the login operations
+ */
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private TextView registerLink, forgotLink;
     private FirebaseAuth firebaseAuth;
@@ -31,6 +34,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private static final String TAG = "LoginActivity";
 
+    //Initiates variable and attaches them to layout components
+    //Attachs onClick listener to buttons
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,10 +56,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         loginBtn.setOnClickListener(this);
     }
 
+    //Login function
     private void loginUser() {
         String email = edEmail.getText().toString().trim();
         String password = edPassword.getText().toString().trim();
-
+        //Textfields must be filled
         if(TextUtils.isEmpty(email)){
             //email is empty
             Toast.makeText(this, "Please enter your email address", Toast.LENGTH_SHORT).show();
@@ -72,6 +78,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         progressDialog.setMessage("Logging in User...");
         progressDialog.show();
 
+        //Log into account with the credentials and authorize the login attempt
         firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -95,6 +102,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 });
 
     }
+    //Redirects user to their respective tasks
     @Override
     public void onClick(View view){
         if(view == registerLink){
@@ -110,6 +118,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    //If user is already logged in, redirect to home page
     @Override
     protected void onStart() {
         super.onStart();

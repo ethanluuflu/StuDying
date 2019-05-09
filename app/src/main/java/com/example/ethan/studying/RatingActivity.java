@@ -23,6 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.lang.reflect.Member;
 import java.util.ArrayList;
 
+//Layout for Rating members
 public class RatingActivity extends AppCompatActivity{
     private TextView mMembersLeft;
     private TextView mMemberName;
@@ -32,7 +33,7 @@ public class RatingActivity extends AppCompatActivity{
     private ArrayList<String> userIDList;
     private String groupID;
 
-
+    //Variables to represent how many members left to rate
     private int MembersLeft = 0;
 
     @Override
@@ -41,6 +42,7 @@ public class RatingActivity extends AppCompatActivity{
         setContentView(R.layout.activity_rating);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN); //put getActivity in front for fragment.
 
+        //Set title of the toolbar to match activity
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Rating Group Members");
         setSupportActionBar(toolbar);
@@ -56,6 +58,9 @@ public class RatingActivity extends AppCompatActivity{
         mRating = findViewById(R.id.memberRating);
         mSubmit = findViewById(R.id.submitBtn);
 
+        //OnClick function to button
+        //When clicked reset the rating and comment section
+        //Additionally move onto the next member of the group
         mSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,6 +93,9 @@ public class RatingActivity extends AppCompatActivity{
         });
     }
 
+    //On startup, grab all the members of the selected group
+    //and store them in an arraylist via memberID
+    //with their ids, pull the necessary data to populate the layout
     @Override
     protected void onStart() {
         super.onStart();
@@ -115,6 +123,7 @@ public class RatingActivity extends AppCompatActivity{
                         });
                     }
                 }
+                //Once finished, close activity
                 if (MembersLeft == 0) {
                     finish();
                     Toast.makeText(getApplicationContext(),"You need more members to rate.", Toast.LENGTH_LONG).show();

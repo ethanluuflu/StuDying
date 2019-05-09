@@ -23,6 +23,9 @@ import org.w3c.dom.Text;
 
 import java.util.List;
 
+/**
+ * GroupList view for the group search result
+ */
 public class groupList extends ArrayAdapter<Groups> {
 
     private Activity context;
@@ -36,6 +39,9 @@ public class groupList extends ArrayAdapter<Groups> {
         this.groups = groups;
     }
 
+    //Sets the proper group information to parts of the layout
+    //Displays group name and subject
+    //as well as if the user is part of the group already
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();

@@ -1,5 +1,7 @@
 package com.example.ethan.studying;
 
+//Rating class to handle the rating operation for groups
+//When user rates members of the group, a rating object is created
 public class Rating {
     private String raterID,
             month, day, year;
@@ -9,6 +11,7 @@ public class Rating {
     public Rating () {
     }
 
+    //Constructor
     public Rating(String raterID, String month, String day, String year, Boolean showName) {
         this.raterID = raterID;
         this.month = month;
@@ -17,6 +20,7 @@ public class Rating {
         this.showName = showName;
     }
 
+    //getters and setters
     public String getRaterID() {
         return raterID;
     }

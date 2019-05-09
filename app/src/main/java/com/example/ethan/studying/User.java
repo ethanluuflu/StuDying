@@ -3,6 +3,9 @@ package com.example.ethan.studying;
 import java.io.Serializable;
 import java.util.Map;
 
+//User class for handling users in the application
+//Contains the standard email address
+//Additionally handles the Rating feature of the application
 public class User implements Serializable {
     private String user;
     private String userID;
@@ -11,14 +14,17 @@ public class User implements Serializable {
     private Double avgRating;
     private Map<String, Boolean> groups;
 
+    //Empty constructor
     public User () {
     }
 
+    //Constructor
     public User (String user, String email, String userID) {
         this.user = user;
         this.email = email;
         this.userID = userID;
     }
+    //Getters and setters
     public String getUser() {
         return user;
     }

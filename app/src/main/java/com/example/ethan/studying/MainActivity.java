@@ -27,6 +27,10 @@ import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+/**
+ * Handles the Home page for the application
+ * controls the navigation drawer which is the base of our UI
+ */
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawer;
     private TextView viewEmail;
@@ -39,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 //    private TextView emailText;
 
+    //Initiates the variables and attaches them to their components
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,7 +80,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navProfileImage = header.findViewById(R.id.nav_profile_image);
     }
 
-
+    //Handles navigation drawers item
+    //Sets the proper fragments depending on the item selected
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
@@ -153,6 +159,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onStart() {
         super.onStart();
+        //Set the username for the account logged in to the TextView in the navigation drawer
         FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("email").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -164,6 +171,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             }
         });
+        //Sets the profile image associated with the account to the ImageView in the navigation drawer
         FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

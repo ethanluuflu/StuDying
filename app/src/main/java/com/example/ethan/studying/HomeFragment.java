@@ -12,12 +12,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+/**
+ * Home fragment
+ * Location for the search group function
+ */
 public class HomeFragment extends Fragment implements View.OnClickListener{
 
     View v;
     private EditText searchGroup;
     private ImageButton searchBtn;
 
+    //Sets layout for group search
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -28,6 +33,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         return v;
     }
 
+    //Sends the query to the group list class to display the proper search results
     @Override
     public void onClick(View view) {
         String groupName = searchGroup.getText().toString().trim();
